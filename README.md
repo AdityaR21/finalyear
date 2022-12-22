@@ -1,2 +1,2 @@
-# Final year project 
-Smart ATM Biometric Authentication using ML
+# Smart ATM Biometric Authentication using ML
+
