@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
+    <link rel="stylesheet" href="{{url_for('static',filename='trial_registe.css')}}" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="/add/user" method="POST">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" name="user-name-input" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Age</span>
+            <input type="text" name="user-age-input" placeholder="Enter your age" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Gender</span>
+            <input type="text" name="user-gender-input" placeholder="Enter your gender" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+            <input type="text" name="user-address-input" placeholder="Enter your address" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" name="user-number-input" placeholder="For eg:+91 9123456789" required>
+          </div>
+        </div>
+        
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+        <div class="message">
+            {% for category, message in get_flashed_messages(with_categories=true)
+            %}
+            <div style="color: {{ category }} ;">{{message}}</div>
+            {% endfor %}
+        </div>
+      </form>
+      
+      <p> <a href="{{ url_for('index') }}" class="btn">Go to Home page</a></p>
+    </div>
+  </div>
+</body>
+</html>

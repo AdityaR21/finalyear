@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Face recognition </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styleface.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+  <body>
+  <div class="big-wrapper light">
+    <img src="./static/img/shape.png" alt="" class="shape" />
+    <h1 class="text1">Face Recognition</h1>
+    <div class="face_div">
+      <img class="face" src="{{ url_for('send_frames1') }}"/>
+    </div>
+    <p class="text1"><a href = "{{ url_for('fingerprint') }}">Click here</a> to redirect to fingerprint page</p>
+  </div>
+  </body>
+</html>
+
+<script>
+            var intervalId = window.setInterval(function(){
+                $.getJSON('/is_decoded/', function(data){
+                    if(data['is_decoded'] >= 2) {
+                        clearInterval(intervalId);  // stop checking it
+                        window.location.href = "{{ url_for('fingerprint') }}";
+                    };
+                })
+            }, 500);  // 500ms = 0.5s
+</script>
+

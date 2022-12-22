@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
+
+<div class="big-wrapper light">
+
+  <img src="{{url_for('static',filename='img/shape.png')}}" alt="" class="shape" />
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="jumbotron text-center p-4">
+          <h2>URT Bank</h2>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+          <div class="form-group">
+            <label for="mobile_number">Mobile Number</label>
+            <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="+91 ****" required>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Authenticate User</button>
+          </div>
+          <div class="right" id="animContainer"></div>
+          <p> <a href="{{ url_for('index') }}" >Go to Home page</a></p><br>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.4/lottie.min.js"></script>
+<script src="{{url_for('static',filename='login_style.js')}}"></script>
+
+{% endblock %}

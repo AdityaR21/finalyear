@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <img id="cam" src="{{ url_for('video_feed') }}">
+</body>
+</html>
+
+<script>
+            var intervalId = window.setInterval(function(){
+                $.getJSON('/is_decoded/', function(data){
+                    if(data['is_decoded'] == true) {
+                        alert("Hello World! " + data['is_decoded']);
+                        clearInterval(intervalId);  // stop checking it
+                    };
+                })
+            }, 500);  // 500ms = 0.5s
+</script>

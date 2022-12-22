@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title> Scanning Fingerprint design & animation </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fingerprint_style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="scanner">
+        <div class="fingarprint">
+        </div>
+        <h3 id="text00">Checking for Fingerprint Match....</h3>
+
+        <br>
+        <div class="text0">
+            <p id="text2" style="color:white;"></p>
+            <br>
+            <img src="{{ url_for('send_fingerprint') }}" width="50%"/>
+        </div>
+        <br>
+        <p class="text1"><a href = "{{ url_for('index') }}">Click here</a> to redirect to home page</p>
+    </div>
+</body>
+
+<script>
+    var intervalId = window.setInterval(function()
+            {
+                $.getJSON('/is_matched/', function(data)
+                {
+                    console.log("Hi");
+                    if(data['is_matched'] > 0.0)
+                    {
+                        console.log("Entered");
+                        clearInterval(intervalId);  // stop checking it
+                            const letters = document.getElementById("text00");
+                            const text2 = document.getElementById("text2");
+                            const add = document.querySelector(".add");
+                            if(letters)
+                            letters.innerHTML="Fingerprint Matched";
+                            if(text2)
+                            {
+                            text2.innerHTML="Matching percentage" + ": " + data['is_matched'] + "%";
+                            }
+                    }
+                 })
+            }, 50);  // 500ms = 0.05s
+
+</script>
+</html>
